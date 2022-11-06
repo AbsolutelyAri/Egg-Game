@@ -23,7 +23,7 @@ public class Player_Movemment : MonoBehaviour
 
     private void Move()
     {
-        Vector3 PlayerMove = new Vector3(Input.GetAxis("Vertical") * Player_Speed * -1, 0, Input.GetAxis("Horizontal") * Player_Speed);
+        Vector3 PlayerMove = new Vector3(Input.GetAxis("Vertical") * Player_Speed / Time.deltaTime * -1, 0, Input.GetAxis("Horizontal") * Player_Speed / Time.deltaTime);
         Player_CC.SimpleMove(PlayerMove * Time.deltaTime);
     }
 
