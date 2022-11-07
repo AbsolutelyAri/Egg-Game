@@ -9,7 +9,7 @@ public class Player_Movemment : MonoBehaviour
     public float Player_Speed;
 
     public GameObject[] Cameras = new GameObject[4];
-    
+
     private void Awake()
     {
         Player_CC = GetComponent<CharacterController>();
@@ -29,7 +29,7 @@ public class Player_Movemment : MonoBehaviour
         Vector3 PlayerMove = new Vector3(Input.GetAxis("Vertical") * Player_Speed / Time.deltaTime * -1, 0, Input.GetAxis("Horizontal") * Player_Speed / Time.deltaTime);
         Player_CC.SimpleMove(PlayerMove * Time.deltaTime);
     }
-    
+
     private void ChangeCameras()
     {
         /*if (GameManager.GameManager_Script.Choosing_Difficult)
