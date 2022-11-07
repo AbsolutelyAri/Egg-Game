@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 102
+  controlID: 16
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -250,7 +250,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 103
+  controlID: 17
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -276,7 +276,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 104
+  controlID: 18
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -401,13 +401,13 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/02_Models/Assets/Tree/Materials
+    - Assets/02_Models/Assets/Wood log/Materials
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/02_Models/Assets/Tree/Materials
+  - Assets/02_Models/Assets/Wood log/Materials
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Anninha\Games Jams\Cross Cultural Impact Jam - Games for
     Change - Game Jam 2022\Our project for Unity\Egg-Game\Egg Game
@@ -415,9 +415,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 865c0000
-    m_LastClickedID: 23686
-    m_ExpandedIDs: 000000006e5c0000805c0000885c00008a5c000000ca9a3b
+    m_SelectedIDs: b85c0000
+    m_LastClickedID: 23736
+    m_ExpandedIDs: 000000006e5c0000885c0000905c0000925c00009c5c000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -472,7 +472,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -489,7 +489,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 6}
+      m_ClientGUIView: {fileID: 12}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
@@ -575,7 +575,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 1afbffff
+      m_ExpandedIDs: bce3ffff1afbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -824,9 +824,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -2.22844, y: 2.2902372, z: 16.485016}
+    m_Target: {x: -16.968351, y: 0.43728775, z: -6.909237}
     speed: 2
-    m_Value: {x: -2.22844, y: 2.2902372, z: 16.485016}
+    m_Value: {x: -16.968351, y: 0.43728775, z: -6.909237}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -873,13 +873,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.06775443, y: -0.012871989, z: 0.00089432753, w: -0.99766254}
+    m_Target: {x: -0.22363034, y: 0.102708496, z: -0.023700414, w: -0.9690138}
     speed: 2
-    m_Value: {x: -0.06775443, y: -0.012871989, z: 0.00089432753, w: -0.99766254}
+    m_Value: {x: -0.22648774, y: 0.104083635, z: -0.024346951, w: -0.96813077}
   m_Size:
-    m_Target: 12.635252
+    m_Target: 6.7620163
     speed: 2
-    m_Value: 12.635252
+    m_Value: 6.470829
   m_Ortho:
     m_Target: 0
     speed: 2
