@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Start Button
+  - Difficult Panel
+  - Minigame Panel
   layers:
   - Default
   - TransparentFX
