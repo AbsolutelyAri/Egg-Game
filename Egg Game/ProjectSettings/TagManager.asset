@@ -5,8 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Start Button
-  - Difficult Panel
   - Minigame Panel
+  - Difficulty Panel
   layers:
   - Default
   - TransparentFX
