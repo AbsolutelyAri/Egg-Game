@@ -1,3 +1,11 @@
+/*
+ * Created by: MrKamikazeee
+ * Created on: 11/6/2022
+ * 
+ * Last Modified: 11/8/2022
+ * 
+ */
+
 using System.Collections;
 using DG.Tweening;
 using Unity.VisualScripting;
@@ -8,7 +16,7 @@ using Sequence = DG.Tweening.Sequence;
 
 public class GameManager : MonoBehaviour
 {
-    static public GameManager GameManager_Script;
+    static public GameManager GameManager_Script { get; private set; }
 
     public bool CanPlay = true;
     public int Time_left;
@@ -41,7 +49,11 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        GameManager_Script = this;
+        if (GameManager_Script == null)
+            GameManager_Script = this;
+        else
+            Destroy(this);
+        DontDestroyOnLoad(this);
         Difficulty = DifficultyGame.none;
         Start_BTN = GameObject.FindGameObjectWithTag("Start Button");
         Difficulty_Panel = GameObject.FindGameObjectWithTag("Difficulty Panel");
