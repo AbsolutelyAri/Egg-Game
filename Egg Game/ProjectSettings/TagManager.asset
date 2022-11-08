@@ -7,6 +7,7 @@ TagManager:
   - Start Button
   - Minigame Panel
   - Difficulty Panel
+  - Slider Component
   layers:
   - Default
   - TransparentFX
