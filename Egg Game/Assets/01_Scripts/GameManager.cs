@@ -212,14 +212,14 @@ public class GameManager : MonoBehaviour
     {
         MG_Cam.SetActive(true);
         Start_BTN.transform.DOMoveY(-35, 1f);
-        Difficulty_Panel.transform.DOMoveX(Difficulty_Panel.transform.position.x - (160 * 2), 1f);
+        Difficulty_Panel.transform.DOMoveX(Difficulty_Panel.transform.position.x - (160 * 2.5f), 1f);
         Difficulty = DifficultyGame.Choosing;
     }
 
     // Roll back the difficult panel
     public void CancelMinigame()
     {
-        Difficulty_Panel.transform.DOMoveX(Difficulty_Panel.transform.position.x + (160 * 2), 1f);
+        Difficulty_Panel.transform.DOMoveX(Difficulty_Panel.transform.position.x + (160 * 2.5f), 1f);
         Start_BTN.transform.DOMoveY(35, 1f);
         Difficulty = DifficultyGame.none;
         MG_Cam.SetActive(false);
