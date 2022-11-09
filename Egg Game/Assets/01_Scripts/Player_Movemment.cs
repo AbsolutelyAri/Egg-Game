@@ -23,8 +23,8 @@ public class Player_Movemment : MonoBehaviour
 
     private void Move()
     {
-        /*if (GameManager.GameManager_Script.Difficulty != GameManager.DifficultyGame.none)
-            return;*/
+        if (GameManager.GameManager_Script.Difficulty != GameManager.DifficultyGame.none)
+            return;
         
         Vector3 PlayerMove = new Vector3(Input.GetAxis("Vertical") * Player_Speed / Time.deltaTime * -1, 0, Input.GetAxis("Horizontal") * Player_Speed / Time.deltaTime);
         Player_CC.SimpleMove(PlayerMove * Time.deltaTime);
@@ -32,8 +32,8 @@ public class Player_Movemment : MonoBehaviour
 
     private void ChangeCameras()
     {
-        /*if (GameManager.GameManager_Script.Difficulty != GameManager.DifficultyGame.none)
-            return;*/
+        if (GameManager.GameManager_Script.Difficulty != GameManager.DifficultyGame.none)
+            return;
         
         if (Input.GetKeyDown(KeyCode.Q))
         {
