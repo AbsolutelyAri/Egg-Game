@@ -1393,7 +1393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startScene: SampleScene
   gameScenes:
-  - Saul Scene
+  - puzzle
 --- !u!4 &237993347
 Transform:
   m_ObjectHideFlags: 0
@@ -1427,14 +1427,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemcollected: {fileID: 8300000, guid: 3fa86c7bd9cbe6141bde58a12a2d1d50, type: 3}
---- !u!81 &246697939
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 246697934}
-  m_Enabled: 1
 --- !u!82 &246697940
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2566,14 +2558,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemcollected: {fileID: 8300000, guid: 286d0a67c8bb1f84bbd2da94c965a14f, type: 3}
---- !u!81 &661576422
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 661576417}
-  m_Enabled: 1
 --- !u!65 &661576423
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3624,14 +3608,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemcollected: {fileID: 8300000, guid: 6f3d3607ca4a8d24a81410683e4f9b9d, type: 3}
---- !u!81 &882445603
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 882445596}
-  m_Enabled: 1
 --- !u!1 &895890604
 GameObject:
   m_ObjectHideFlags: 0
@@ -3775,6 +3751,7 @@ GameObject:
   m_Component:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: 'CanvasCAmera '
   m_TagString: MainCamera
@@ -3840,6 +3817,14 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &963194229
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
 --- !u!1001 &977994866
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4004,14 +3989,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemcollected: {fileID: 8300000, guid: 801ca64e7c1ebe84295ba4192156767f, type: 3}
---- !u!81 &1052172654
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1052172649}
-  m_Enabled: 1
 --- !u!65 &1052172655
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5207,14 +5184,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemcollected: {fileID: 8300000, guid: fdb4aa8360237d3419567ed9d7316c16, type: 3}
---- !u!81 &1354009922
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1354009917}
-  m_Enabled: 1
 --- !u!82 &1354009923
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7372,14 +7341,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemcollected: {fileID: 8300000, guid: eb7a6d26e2909ee4286c9eb8d0121486, type: 3}
---- !u!81 &1800287899
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1800287894}
-  m_Enabled: 1
 --- !u!65 &1800287900
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7741,14 +7702,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemcollected: {fileID: 8300000, guid: e5ddb708115667a4b8078ed3bad7cbf9, type: 3}
---- !u!81 &1839386437
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1839386432}
-  m_Enabled: 1
 --- !u!65 &1839386438
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8507,14 +8460,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemcollected: {fileID: 8300000, guid: 13789a57ac4504b4b9aa5aaa4a36631c, type: 3}
---- !u!81 &2134924780
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2134924775}
-  m_Enabled: 1
 --- !u!65 &2134924781
 BoxCollider:
   m_ObjectHideFlags: 0
