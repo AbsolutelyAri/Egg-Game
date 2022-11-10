@@ -19,6 +19,8 @@ public class MelodyMechanic : MonoBehaviour
 
     public TextMeshProUGUI Wait_Text;
 
+    public int Wall_Number;
+
     private void Awake()
     {
         Start_BTN = GameObject.FindGameObjectWithTag("Start Button");
@@ -46,5 +48,44 @@ public class MelodyMechanic : MonoBehaviour
         {
             Start_BTN.transform.DOMoveY(-35, 1f);
         }
+    }
+    
+    // Move the difficuly panel into the screen
+    public void DifficultyPanel()
+    {
+        GameManager.GameManager_Script.MG_Cam.SetActive(true);
+        Start_BTN.transform.DOMoveY(-35, 1f);
+        GameManager.GameManager_Script.Difficulty_Panel.transform.DOMoveX(GameManager.GameManager_Script.Difficulty_Panel.transform.position.x - (160 * 2.5f), 1f);
+        GameManager.GameManager_Script.Difficulty = GameManager.DifficultyGame.Choosing;
+    }
+
+    // Roll back the difficult panel
+    public void CancelMinigame()
+    {
+        GameManager.GameManager_Script.Difficulty_Panel.transform.DOMoveX(GameManager.GameManager_Script.Difficulty_Panel.transform.position.x + (160 * 2.5f), 1f);
+        Start_BTN.transform.DOMoveY(35, 1f);
+        GameManager.GameManager_Script.Difficulty = GameManager.DifficultyGame.none;
+        GameManager.GameManager_Script.MG_Cam.SetActive(false);
+    }
+    
+    public void EasyMode()
+    {
+        GameManager.GameManager_Script.Difficulty = GameManager.DifficultyGame.Easy;
+        GameManager.GameManager_Script.StartMinigame();
+        GameManager.GameManager_Script.Wall_Number = Wall_Number;
+    }
+
+    public void MediumMode()
+    {
+        GameManager.GameManager_Script.Difficulty = GameManager.DifficultyGame.Medium;
+        GameManager.GameManager_Script.StartMinigame();
+        GameManager.GameManager_Script.Wall_Number = Wall_Number;
+    }
+
+    public void HardMode()
+    {
+        GameManager.GameManager_Script.Difficulty = GameManager.DifficultyGame.Hard;
+        GameManager.GameManager_Script.StartMinigame();
+        GameManager.GameManager_Script.Wall_Number = Wall_Number;
     }
 }

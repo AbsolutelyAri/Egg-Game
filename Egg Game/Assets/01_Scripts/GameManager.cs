@@ -6,9 +6,12 @@
  * 
  */
 
+using System;
 using System.Collections;
 using DG.Tweening;
+using TMPro;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -16,32 +19,37 @@ using Sequence = DG.Tweening.Sequence;
 
 public class GameManager : MonoBehaviour
 {
-    static public GameManager GameManager_Script { get; private set; }
+    static public GameManager GameManager_Script { get; set; }
 
     public bool CanPlay = true;
     public int Time_left;
 
-    private GameObject Start_BTN;
-    private GameObject Difficulty_Panel;
+    [Header("Difficulty Panel")]
+    public GameObject Difficulty_Panel;
     public DifficultyGame Difficulty;
     public Slider Time_Slider;
     private int MG_Repetitions;
 
-    private GameObject MG_Panel;
+    [Header("Minigame")]
     public GameObject MG_Cam;
+    private GameObject MG_Panel;
     public GameObject[] MG_Buttons = new GameObject[4];
     public GameObject[] MG_Buttons_Pos;
     public GameObject[] MG_Buttons_InGame = new GameObject[8];
     private int[] MG_Buttons_Info = new int[8];
+    public TextMeshProUGUI FailText;
 
     private int TemporaryInt;
+
+    [Header("Walls")]
+    public int Wall_Number;
+    public GameObject[] Wall1_States;
 
     public enum DifficultyGame
     {
         none,
         Choosing,
         Fail,
-        Win,
         Easy,
         Medium,
         Hard
@@ -55,7 +63,6 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         DontDestroyOnLoad(this);
         Difficulty = DifficultyGame.none;
-        Start_BTN = GameObject.FindGameObjectWithTag("Start Button");
         Difficulty_Panel = GameObject.FindGameObjectWithTag("Difficulty Panel");
         MG_Panel = GameObject.FindGameObjectWithTag("Minigame Panel");
     }
@@ -71,14 +78,13 @@ public class GameManager : MonoBehaviour
         Number2();
         Number3();
         Number4();
-        CheckWin();
         CheckFail();
     }
 
     // Prepare the mini-game
-    private void StartMinigame()
+    public void StartMinigame()
     {
-        Difficulty_Panel.transform.DOMoveX(Difficulty_Panel.transform.position.x + (160 * 2), 1f);
+        Difficulty_Panel.transform.DOMoveX(Difficulty_Panel.transform.position.x + (160 * 2.5f), 1f);
         MG_Panel.GetComponent<Image>().DOFade(1, 1f);
         GameObject[] SliderComponents;
         SliderComponents = GameObject.FindGameObjectsWithTag("Slider Component");
@@ -111,7 +117,7 @@ public class GameManager : MonoBehaviour
     // Select a random number for the mini-game
     private void RandomButton()
     {
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < MG_Buttons_Pos.Length; i++)
         {
             MG_Buttons_Info[i] = 0;
             int Random_Number = Random.Range(0, 4);
@@ -151,7 +157,7 @@ public class GameManager : MonoBehaviour
     // Runs the mini-game
     IEnumerator Minigame(int num)
     {
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 8; i++) // Search the first active number in the sequence
         {
             if (MG_Buttons_InGame[i].activeSelf)
             {
@@ -160,7 +166,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (MG_Buttons_Info[TemporaryInt] == num)
+        if (MG_Buttons_Info[TemporaryInt] == num) // Controls if the player press the correct key
         {
             Sequence QuickSequence = DOTween.Sequence();
             QuickSequence.Append(MG_Buttons_InGame[TemporaryInt].transform.DOScaleX(.8f * 2, .1f))
@@ -171,18 +177,10 @@ public class GameManager : MonoBehaviour
                 .OnComplete(() =>
                 {
                     MG_Buttons_InGame[TemporaryInt].SetActive(false);
-                    if (!MG_Buttons_InGame[7].activeSelf && MG_Repetitions > 0)
-                    {
-                        MG_Repetitions--;
-                        for (int i = 0; i < 8; i++)
-                        {
-                            Destroy(MG_Buttons_InGame[i]);
-                            MG_Buttons_InGame[i] = null;
-                        }
-                        RandomButton();
-                    }
-                    else if (!MG_Buttons_InGame[7].activeSelf && MG_Repetitions == 0)
-                        Difficulty = DifficultyGame.Win;
+                    if (!MG_Buttons_InGame[7].activeSelf && MG_Repetitions > 0) 
+                        ResetSequence();
+                    else if (!MG_Buttons_InGame[7].activeSelf && MG_Repetitions == 0) // If the player won the game
+                        FinishGame();
                 });
         }
         else
@@ -206,61 +204,88 @@ public class GameManager : MonoBehaviour
 
         }
     }
-
-    // Move the difficuly panel into the screen
-    public void DifficultyPanel()
+    
+    // Reset the sequences to continue the mini-game
+    private void ResetSequence()
     {
-        MG_Cam.SetActive(true);
-        Start_BTN.transform.DOMoveY(-35, 1f);
-        Difficulty_Panel.transform.DOMoveX(Difficulty_Panel.transform.position.x - (160 * 2.5f), 1f);
-        Difficulty = DifficultyGame.Choosing;
+        MG_Repetitions--;
+        for (int i = 0; i < 8; i++)
+        {
+            Destroy(MG_Buttons_InGame[i]);
+            MG_Buttons_InGame[i] = null;
+        }
+        RandomButton();
     }
 
-    // Roll back the difficult panel
-    public void CancelMinigame()
+    // Finishes the game depending on the difficulty
+    private void FinishGame()
     {
-        Difficulty_Panel.transform.DOMoveX(Difficulty_Panel.transform.position.x + (160 * 2.5f), 1f);
-        Start_BTN.transform.DOMoveY(35, 1f);
-        Difficulty = DifficultyGame.none;
+        DOTween.PauseAll();
+        switch (Wall_Number)
+        {
+            case 1:
+                StartCoroutine(Wall1());
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+        }
         MG_Cam.SetActive(false);
-    }
-
-    public void EasyMode()
-    {
-        Difficulty = DifficultyGame.Easy;
-        StartMinigame();
-    }
-
-    public void MediumMode()
-    {
-        Difficulty = DifficultyGame.Medium;
-        StartMinigame();
-    }
-
-    public void HardMode()
-    {
-        Difficulty = DifficultyGame.Hard;
-        StartMinigame();
-    }
-
-    public void CheckWin()
-    {
-        if (Difficulty != DifficultyGame.Win)
-            return;
-        
-        MG_Cam.SetActive(false);
-        DOTween.Clear();
         ResetValues();
     }
 
+    IEnumerator Wall1()
+    {
+        switch (Difficulty)
+        {
+            case DifficultyGame.Easy:
+                FailText.text = "Nothing happens";
+                CanPlay = false;
+                Sequence WT_Sequence = DOTween.Sequence();
+                WT_Sequence.Append(FailText.DOFade(1, 1f))
+                    .AppendInterval(3f)
+                    .Append(FailText.DOFade(0, 1f));
+                break;
+            case DifficultyGame.Medium:
+                    for (int i = 0; i < Wall1_States.Length; i++)
+                        Wall1_States[i].SetActive(false);
+                    Wall1_States[1].SetActive(true);
+                break;
+            case DifficultyGame.Hard:
+                    for (int i = 0; i < Wall1_States.Length; i++)
+                        Wall1_States[i].SetActive(false);
+                    
+                    Wall1_States[1].SetActive(true);
+                    yield return new WaitForSeconds(.5f);
+                    for (int i = 0; i < Wall1_States.Length; i++)
+                        Wall1_States[i].SetActive(false);
+                    
+                    Wall1_States[2].SetActive(true);
+                    yield return new WaitForSeconds(.5f);
+                    for (int i = 0; i < Wall1_States.Length; i++)
+                        Wall1_States[i].SetActive(false);
+                    
+                    Wall1_States[3].SetActive(true);
+                break;
+        }
+
+        yield return new WaitForSeconds(1);
+        CanPlay = true;
+    }
+    
     public void ResetValues()
     {
-        MG_Panel.GetComponent<Image>().DOFade(0, 1f);
-        GameObject[] SliderComponents;
-        SliderComponents = GameObject.FindGameObjectsWithTag("Slider Component");
-        for (int i = 0; i < SliderComponents.Length; i++)
-            SliderComponents[i].GetComponent<Image>().DOFade(0, 1f);
-        Time_Slider.value = 20;
+        GameObject[] SliderComponents = GameObject.FindGameObjectsWithTag("Slider Component");
+        Sequence FinishSequence = DOTween.Sequence();
+        FinishSequence.Append(MG_Panel.GetComponent<Image>().DOFade(0, 1f))
+            .Join(SliderComponents[0].GetComponent<Image>().DOFade(0, 1f))
+            .Join(SliderComponents[1].GetComponent<Image>().DOFade(0,1f))
+            .AppendInterval(5f)
+            .OnComplete(() => DOTween.Clear());
+        Time_Slider.value = 15;
         for (int i = 0; i < 8; i++)
         {
             Destroy(MG_Buttons_InGame[i]);
