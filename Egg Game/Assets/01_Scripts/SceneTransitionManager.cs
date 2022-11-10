@@ -53,7 +53,6 @@ public class SceneTransitionManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("Going to quit game");
             QuitGame();
         }
     }
