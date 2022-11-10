@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
 {
     static public GameManager GameManager_Script;
 
+    public bool CanPlay = true;
+    public int Time_left;
+
     private GameObject Start_BTN;
     private GameObject Difficulty_Panel;
     public DifficultyGame Difficulty;
@@ -30,6 +33,7 @@ public class GameManager : MonoBehaviour
         none,
         Choosing,
         Fail,
+        Win,
         Easy,
         Medium,
         Hard
@@ -37,6 +41,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        GameManager_Script = this;
         Difficulty = DifficultyGame.none;
         Start_BTN = GameObject.FindGameObjectWithTag("Start Button");
         Difficulty_Panel = GameObject.FindGameObjectWithTag("Difficulty Panel");
@@ -54,6 +59,8 @@ public class GameManager : MonoBehaviour
         Number2();
         Number3();
         Number4();
+        CheckWin();
+        CheckFail();
     }
 
     // Prepare the mini-game
@@ -61,35 +68,34 @@ public class GameManager : MonoBehaviour
     {
         Difficulty_Panel.transform.DOMoveX(Difficulty_Panel.transform.position.x + (160 * 2), 1f);
         MG_Panel.GetComponent<Image>().DOFade(1, 1f);
+        GameObject[] SliderComponents;
+        SliderComponents = GameObject.FindGameObjectsWithTag("Slider Component");
+        for (int i = 0; i < SliderComponents.Length; i++)
+            SliderComponents[i].GetComponent<Image>().DOFade(1, 1f);
+        StartCoroutine(Timer());
         switch (Difficulty)
         {
             case DifficultyGame.Easy:
-                MG_Repetitions = 3;
+                MG_Repetitions = 2;
                 break;
             
             case DifficultyGame.Medium:
-                MG_Repetitions = 4;
+                MG_Repetitions = 3;
                 break;
             
             case DifficultyGame.Hard:
-                MG_Repetitions = 5;
+                MG_Repetitions = 4;
                 break;
         }
-        Timer();
         RandomButton();
     }
 
-    private void Timer()
+    IEnumerator Timer()
     {
-        if (Difficulty == DifficultyGame.none)
-            return;
-
-        if (Time_Slider.value > 0)
-            Time_Slider.value -= Time.deltaTime;
-        else if (Time_Slider.value == 0)
-            Difficulty = DifficultyGame.Fail;
+        yield return new WaitForSeconds(1);
+        Time_Slider.DOValue(0, 20f);
     }
-    
+
     // Select a random number for the mini-game
     private void RandomButton()
     {
@@ -163,6 +169,8 @@ public class GameManager : MonoBehaviour
                         }
                         RandomButton();
                     }
+                    else if (!MG_Buttons_InGame[7].activeSelf && MG_Repetitions == 0)
+                        Difficulty = DifficultyGame.Win;
                 });
         }
         else
@@ -220,5 +228,55 @@ public class GameManager : MonoBehaviour
     public void HardMode()
     {
         Difficulty = DifficultyGame.Hard;
+        StartMinigame();
+    }
+
+    public void CheckWin()
+    {
+        if (Difficulty != DifficultyGame.Win)
+            return;
+        
+        MG_Cam.SetActive(false);
+        DOTween.Clear();
+        ResetValues();
+    }
+
+    public void ResetValues()
+    {
+        MG_Panel.GetComponent<Image>().DOFade(0, 1f);
+        GameObject[] SliderComponents;
+        SliderComponents = GameObject.FindGameObjectsWithTag("Slider Component");
+        for (int i = 0; i < SliderComponents.Length; i++)
+            SliderComponents[i].GetComponent<Image>().DOFade(0, 1f);
+        Time_Slider.value = 20;
+        for (int i = 0; i < 8; i++)
+        {
+            Destroy(MG_Buttons_InGame[i]);
+            MG_Buttons_InGame[i] = null;
+        }
+        Difficulty = DifficultyGame.none;
+    }
+    
+    public void CheckFail()
+    {
+        if (Time_Slider.value > 0)
+            return;
+
+        Difficulty = DifficultyGame.Fail;
+        MG_Cam.SetActive(false);
+        ResetValues();
+        StartCoroutine(StartWaiting());
+    }
+
+    IEnumerator StartWaiting()
+    {
+        CanPlay = false;
+        Time_left = 3;
+        yield return new WaitForSeconds(1f);
+        Time_left = 2;
+        yield return new WaitForSeconds(1f);
+        Time_left = 1;
+        yield return new WaitForSeconds(1f);
+        CanPlay = true;
     }
 }
