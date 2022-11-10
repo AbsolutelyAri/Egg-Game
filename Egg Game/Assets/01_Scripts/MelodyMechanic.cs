@@ -19,8 +19,6 @@ public class MelodyMechanic : MonoBehaviour
 
     public TextMeshProUGUI Wait_Text;
 
-    public int Wall_Number;
-
     private void Awake()
     {
         Start_BTN = GameObject.FindGameObjectWithTag("Start Button");
@@ -30,9 +28,9 @@ public class MelodyMechanic : MonoBehaviour
     {
         if (other.CompareTag("Player") && GameManager.GameManager_Script.CanPlay)
         {
-            Start_BTN.transform.DOMoveY(35, 1f);
+            Start_BTN.transform.DOMoveY(45, 1f);
         }
-        else
+        else if (other.CompareTag("Player") && !GameManager.GameManager_Script.CanPlay)
         {
             Wait_Text.text = "You can't play now, just wait " + GameManager.GameManager_Script.Time_left + " seconds to play again.";
             Sequence WT_Sequence = DOTween.Sequence();
@@ -72,20 +70,17 @@ public class MelodyMechanic : MonoBehaviour
     {
         GameManager.GameManager_Script.Difficulty = GameManager.DifficultyGame.Easy;
         GameManager.GameManager_Script.StartMinigame();
-        GameManager.GameManager_Script.Wall_Number = Wall_Number;
     }
 
     public void MediumMode()
     {
         GameManager.GameManager_Script.Difficulty = GameManager.DifficultyGame.Medium;
         GameManager.GameManager_Script.StartMinigame();
-        GameManager.GameManager_Script.Wall_Number = Wall_Number;
     }
 
     public void HardMode()
     {
         GameManager.GameManager_Script.Difficulty = GameManager.DifficultyGame.Hard;
         GameManager.GameManager_Script.StartMinigame();
-        GameManager.GameManager_Script.Wall_Number = Wall_Number;
     }
 }

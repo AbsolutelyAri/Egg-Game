@@ -35,15 +35,21 @@ public class GameManager : MonoBehaviour
     private GameObject MG_Panel;
     public GameObject[] MG_Buttons = new GameObject[4];
     public GameObject[] MG_Buttons_Pos;
-    public GameObject[] MG_Buttons_InGame = new GameObject[8];
+    private GameObject[] MG_Buttons_InGame;
     private int[] MG_Buttons_Info = new int[8];
-    public TextMeshProUGUI FailText;
+    public TextMeshProUGUI Fail_Text;
+    public int Set_Time_Value = 7;
+    private GameObject Reset_Button;
+    private GameObject Main_Menu_Button;
 
     private int TemporaryInt;
 
     [Header("Walls")]
-    public int Wall_Number;
+    public int Wall_Number = 1;
     public GameObject[] Wall1_States;
+    public GameObject[] Wall2_States;
+    public GameObject[] Wall3_States;
+    public GameObject[] Wall4_States;
 
     public enum DifficultyGame
     {
@@ -65,6 +71,14 @@ public class GameManager : MonoBehaviour
         Difficulty = DifficultyGame.none;
         Difficulty_Panel = GameObject.FindGameObjectWithTag("Difficulty Panel");
         MG_Panel = GameObject.FindGameObjectWithTag("Minigame Panel");
+        Time_Slider.maxValue = Set_Time_Value;
+        MG_Buttons_InGame = new GameObject[MG_Buttons_Pos.Length];
+        Reset_Button = GameObject.Find("Restart Game");
+        Main_Menu_Button = GameObject.Find("Main Menu");
+        if (Set_Time_Value == 0)
+            Set_Time_Value = 7;
+        if (Fail_Text == null)
+            Fail_Text = GameObject.Find("WaitText").GetComponent<TextMeshProUGUI>();
     }
 
     void Start()
@@ -157,29 +171,28 @@ public class GameManager : MonoBehaviour
     // Runs the mini-game
     IEnumerator Minigame(int num)
     {
-        for (int i = 0; i < 8; i++) // Search the first active number in the sequence
+        for (int i = 0; i < MG_Buttons_InGame.Length; i++) // Search the first active number in the sequence
         {
             if (MG_Buttons_InGame[i].activeSelf)
             {
                 TemporaryInt = i;
-                i = 8;
+                i = MG_Buttons_InGame.Length;
             }
         }
 
         if (MG_Buttons_Info[TemporaryInt] == num) // Controls if the player press the correct key
         {
             Sequence QuickSequence = DOTween.Sequence();
-            QuickSequence.Append(MG_Buttons_InGame[TemporaryInt].transform.DOScaleX(.8f * 2, .1f))
-                .Join(MG_Buttons_InGame[TemporaryInt].transform.DOScaleY(2.7f * 2, .1f))
-                .Join(MG_Buttons_InGame[TemporaryInt].transform.DOScaleZ(2.7f * 2, .1f))
+            QuickSequence.Append(MG_Buttons_InGame[TemporaryInt].transform.DOScaleX(1f * 2, .1f))
+                .Join(MG_Buttons_InGame[TemporaryInt].transform.DOScaleY(1.3f * 2, .1f))
                 .Join(MG_Buttons_InGame[TemporaryInt].GetComponent<Image>().DOColor(new Color(166, 166, 166), .1f))
                 .Join(MG_Buttons_InGame[TemporaryInt].GetComponent<Image>().DOFade(0, .1f))
                 .OnComplete(() =>
                 {
                     MG_Buttons_InGame[TemporaryInt].SetActive(false);
-                    if (!MG_Buttons_InGame[7].activeSelf && MG_Repetitions > 0) 
+                    if (!MG_Buttons_InGame[MG_Buttons_InGame.Length - 1].activeSelf && MG_Repetitions > 0) 
                         ResetSequence();
-                    else if (!MG_Buttons_InGame[7].activeSelf && MG_Repetitions == 0) // If the player won the game
+                    else if (!MG_Buttons_InGame[MG_Buttons_InGame.Length - 1].activeSelf && MG_Repetitions == 0) // If the player won the game
                         FinishGame();
                 });
         }
@@ -191,14 +204,13 @@ public class GameManager : MonoBehaviour
     // Reset numbers
     public void ResetNumbers()
     {
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < MG_Buttons_InGame.Length; i++)
         {
             if (!MG_Buttons_InGame[i].activeSelf)
             {
                 MG_Buttons_InGame[i].SetActive(true);
-                MG_Buttons_InGame[i].transform.DOScaleX(.8f, .3f);
-                MG_Buttons_InGame[i].transform.DOScaleY(2.7f, .3f);
-                MG_Buttons_InGame[i].transform.DOScaleZ(2.7f, .3f);
+                MG_Buttons_InGame[i].transform.DOScaleX(1, .3f);
+                MG_Buttons_InGame[i].transform.DOScaleY(1.3f, .3f);
                 MG_Buttons_InGame[i].GetComponent<Image>().DOFade(1, .3f);
             }
 
@@ -209,7 +221,7 @@ public class GameManager : MonoBehaviour
     private void ResetSequence()
     {
         MG_Repetitions--;
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < MG_Buttons_InGame.Length; i++)
         {
             Destroy(MG_Buttons_InGame[i]);
             MG_Buttons_InGame[i] = null;
@@ -227,14 +239,15 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(Wall1());
                 break;
             case 2:
+                StartCoroutine(Wall2());
                 break;
             case 3:
+                StartCoroutine(Wall3());
                 break;
             case 4:
+                StartCoroutine(Wall4());
                 break;
         }
-        MG_Cam.SetActive(false);
-        ResetValues();
     }
 
     IEnumerator Wall1()
@@ -242,18 +255,20 @@ public class GameManager : MonoBehaviour
         switch (Difficulty)
         {
             case DifficultyGame.Easy:
-                FailText.text = "Nothing happens";
+                Fail_Text.text = "Nothing happens";
                 CanPlay = false;
                 Sequence WT_Sequence = DOTween.Sequence();
-                WT_Sequence.Append(FailText.DOFade(1, 1f))
+                WT_Sequence.Append(Fail_Text.DOFade(1, 1f))
                     .AppendInterval(3f)
-                    .Append(FailText.DOFade(0, 1f));
+                    .Append(Fail_Text.DOFade(0, 1f));
                 break;
+            
             case DifficultyGame.Medium:
                     for (int i = 0; i < Wall1_States.Length; i++)
                         Wall1_States[i].SetActive(false);
                     Wall1_States[1].SetActive(true);
                 break;
+            
             case DifficultyGame.Hard:
                     for (int i = 0; i < Wall1_States.Length; i++)
                         Wall1_States[i].SetActive(false);
@@ -271,9 +286,223 @@ public class GameManager : MonoBehaviour
                     Wall1_States[3].SetActive(true);
                 break;
         }
-
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1f);
+        Difficulty = DifficultyGame.none;
+        MG_Cam.SetActive(false);
         CanPlay = true;
+        Wall1_States[0].GetComponentInParent<BoxCollider>().enabled = false;
+        Wall_Number++;
+        ResetValues();
+    }
+
+    IEnumerator Wall2()
+    {
+        MG_Cam.SetActive(false);
+        switch (Difficulty)
+        {
+            case DifficultyGame.Easy:
+                Fail_Text.text = "Nothing happens";
+                CanPlay = false;
+                Sequence WT_Sequence = DOTween.Sequence();
+                WT_Sequence.Append(Fail_Text.DOFade(1, 1f))
+                    .AppendInterval(3f)
+                    .Append(Fail_Text.DOFade(0, 1f));
+                ResetValues();
+                break;
+            
+            case DifficultyGame.Medium:
+                for (int i = 0; i < Wall2_States.Length; i++)
+                    Wall2_States[i].SetActive(false);
+                Wall2_States[4].SetActive(true);
+                Wall2_States[1].SetActive(true);
+                yield return new WaitForSeconds(1f);
+                Wall2_States[1].transform.localPosition = new Vector3( 2.2f, -0.38f, -1.32f);
+                Wall2_States[1].transform.localRotation = Quaternion.Euler( 0, 33.63f, 0);
+                yield return new WaitForSeconds(.5f);
+                Wall2_States[1].transform.localPosition = new Vector3( 5.74f, -0.71f, -1.65f);
+                Wall2_States[1].transform.localRotation = Quaternion.Euler( 0, 53.39f, 0);
+                Wall2_States[1].transform.localScale = new Vector3(1.3f, 1.3f, 1.8f);
+                yield return new WaitForSeconds(.5f);
+                Wall2_States[1].transform.localPosition = new Vector3( 8.15f, -0.71f, -4.39f);
+                Wall2_States[1].transform.localRotation = Quaternion.Euler( 0, 90f, 0);
+                Wall2_States[1].transform.localScale = new Vector3(1.3f, 1.3f, 2.3f);
+                yield return new WaitForSeconds(.5f);
+                Wall_Number++;
+                ResetValues();
+                Wall2_States[4].SetActive(false);
+                break;
+            
+            case DifficultyGame.Hard:
+                MG_Cam.SetActive(false);
+                for (int i = 0; i < Wall2_States.Length; i++)
+                    Wall2_States[i].SetActive(false);
+                
+                Wall2_States[4].SetActive(true);
+                Wall2_States[1].SetActive(true);
+                yield return new WaitForSeconds(.5f);
+                for (int i = 0; i < Wall2_States.Length; i++)
+                    Wall2_States[i].SetActive(false);
+                    
+                Wall2_States[2].SetActive(true);
+                yield return new WaitForSeconds(.5f);
+                for (int i = 0; i < Wall2_States.Length; i++)
+                    Wall2_States[i].SetActive(false);
+                    
+                Wall2_States[3].SetActive(true);
+                yield return new WaitForSeconds(1f);
+                Fail_Text.text = "You have broken the bridge, now you can't cross to the other side";
+                Fail_Text.DOFade(1, 1f);
+                GameObject[] SliderComponents = GameObject.FindGameObjectsWithTag("Slider Component");
+                Sequence FinishSequence = DOTween.Sequence();
+                FinishSequence.Append(MG_Panel.GetComponent<Image>().DOFade(0, 1f))
+                    .Join(SliderComponents[0].GetComponent<Image>().DOFade(0, 1f))
+                    .Join(SliderComponents[1].GetComponent<Image>().DOFade(0,1f))
+                    .Join(Reset_Button.GetComponent<Image>().DOFade(1, 1f))
+                    .Join(Reset_Button.GetComponentInChildren<TextMeshProUGUI>().DOFade(1, 1f))
+                    .Join(Main_Menu_Button.GetComponent<Image>().DOFade(1, 1f))
+                    .Join(Main_Menu_Button.GetComponentInChildren<TextMeshProUGUI>().DOFade(1, 1f))
+                    .AppendInterval(5f)
+                    .OnComplete(() => DOTween.Clear());
+                Wall2_States[4].SetActive(false);
+                break;
+        }
+        Wall2_States[0].GetComponentInParent<BoxCollider>().enabled = false;
+    }
+
+    IEnumerator Wall3()
+    {
+        GameObject[] SliderComponents = GameObject.FindGameObjectsWithTag("Slider Component");
+        Sequence FinishSequence = DOTween.Sequence();
+        MG_Cam.SetActive(false);
+        switch (Difficulty)
+        {
+            case DifficultyGame.Easy:
+                Wall3_States[4].SetActive(true);
+                Wall3_States[0].GetComponentInParent<BoxCollider>().enabled = false;
+                yield return new WaitForSeconds(1f);
+                Wall3_States[1].transform.localPosition = new Vector3(0.728f, -0.83f, -0.36f);
+                yield return new WaitForSeconds(.5f);
+                Wall3_States[1].transform.localPosition = new Vector3(0.852f, -2.6f, -0.36f);
+                yield return new WaitForSeconds(.5f);
+                Wall3_States[1].transform.localPosition = new Vector3(1.168f, -5.8f, -0.4f);
+                Wall4_States[0].SetActive(false);
+                Wall4_States[1].SetActive(true);
+                yield return new WaitForSeconds(1f);
+                Wall3_States[4].SetActive(false);
+                Wall_Number++;
+                ResetValues();
+                break;
+            
+            case DifficultyGame.Medium:
+                MG_Cam.SetActive(false);
+                for (int i = 0; i < Wall3_States.Length; i++)
+                    Wall3_States[i].SetActive(false);
+                
+                Wall3_States[4].SetActive(true);
+                Wall3_States[1].SetActive(true);
+                yield return new WaitForSeconds(.5f);
+                for (int i = 0; i < Wall3_States.Length; i++)
+                    Wall3_States[i].SetActive(false);
+                    
+                Wall3_States[2].SetActive(true);
+                yield return new WaitForSeconds(.5f);
+                for (int i = 0; i < Wall3_States.Length; i++)
+                    Wall3_States[i].SetActive(false);
+                    
+                Wall3_States[3].SetActive(true);
+                yield return new WaitForSeconds(1f);
+                Fail_Text.text = "You have broken the block, now you can't finish the level!";
+                Fail_Text.DOFade(1, 1f);
+                FinishSequence.Append(MG_Panel.GetComponent<Image>().DOFade(0, 1f))
+                    .Join(SliderComponents[0].GetComponent<Image>().DOFade(0, 1f))
+                    .Join(SliderComponents[1].GetComponent<Image>().DOFade(0,1f))
+                    .Join(Reset_Button.GetComponent<Image>().DOFade(1, 1f))
+                    .Join(Reset_Button.GetComponentInChildren<TextMeshProUGUI>().DOFade(1, 1f))
+                    .Join(Main_Menu_Button.GetComponent<Image>().DOFade(1, 1f))
+                    .Join(Main_Menu_Button.GetComponentInChildren<TextMeshProUGUI>().DOFade(1, 1f))
+                    .AppendInterval(5f)
+                    .OnComplete(() => DOTween.Clear());
+                Wall3_States[4].SetActive(false);
+                break;
+            
+            case DifficultyGame.Hard:
+                MG_Cam.SetActive(false);
+                for (int i = 0; i < Wall3_States.Length; i++)
+                    Wall3_States[i].SetActive(false);
+                
+                Wall3_States[4].SetActive(true);
+                Wall3_States[1].SetActive(true);
+                yield return new WaitForSeconds(.5f);
+                for (int i = 0; i < Wall3_States.Length; i++)
+                    Wall3_States[i].SetActive(false);
+                    
+                Wall3_States[2].SetActive(true);
+                yield return new WaitForSeconds(.5f);
+                for (int i = 0; i < Wall3_States.Length; i++)
+                    Wall3_States[i].SetActive(false);
+                    
+                Wall3_States[3].SetActive(true);
+                yield return new WaitForSeconds(1f);
+                Fail_Text.text = "You have broken the block, now you can't finish the level!";
+                Fail_Text.DOFade(1, 1f);
+                FinishSequence.Append(MG_Panel.GetComponent<Image>().DOFade(0, 1f))
+                    .Join(SliderComponents[0].GetComponent<Image>().DOFade(0, 1f))
+                    .Join(SliderComponents[1].GetComponent<Image>().DOFade(0,1f))
+                    .Join(Reset_Button.GetComponent<Image>().DOFade(1, 1f))
+                    .Join(Reset_Button.GetComponentInChildren<TextMeshProUGUI>().DOFade(1, 1f))
+                    .Join(Main_Menu_Button.GetComponent<Image>().DOFade(1, 1f))
+                    .Join(Main_Menu_Button.GetComponentInChildren<TextMeshProUGUI>().DOFade(1, 1f))
+                    .AppendInterval(5f)
+                    .OnComplete(() => DOTween.Clear());
+                Wall3_States[4].SetActive(false);
+                break;
+        }
+        Wall3_States[0].GetComponentInParent<BoxCollider>().enabled = false;
+    }
+
+    IEnumerator Wall4()
+    {
+        MG_Cam.SetActive(false);
+        Wall3_States[0].GetComponentInParent<BoxCollider>().enabled = false;
+        Sequence WT_Sequence = DOTween.Sequence();
+        switch (Difficulty)
+        {
+            case DifficultyGame.Easy:
+                Fail_Text.text = "Nothing happens";
+                CanPlay = false;
+                WT_Sequence.Append(Fail_Text.DOFade(1, 1f))
+                    .AppendInterval(3f)
+                    .Append(Fail_Text.DOFade(0, 1f));
+                break;
+            
+            case DifficultyGame.Medium:
+                Fail_Text.text = "Nothing happens";
+                CanPlay = false;
+                WT_Sequence.Append(Fail_Text.DOFade(1, 1f))
+                    .AppendInterval(3f)
+                    .Append(Fail_Text.DOFade(0, 1f));
+                break;
+            
+            case DifficultyGame.Hard:
+                Wall4_States[4].SetActive(true);
+                for (int i = 0; i < Wall4_States.Length; i++)
+                    Wall4_States[i].SetActive(false);
+                    
+                Wall4_States[1].SetActive(true);
+                yield return new WaitForSeconds(.5f);
+                for (int i = 0; i < Wall4_States.Length; i++)
+                    Wall4_States[i].SetActive(false);
+                    
+                Wall4_States[2].SetActive(true);
+                yield return new WaitForSeconds(.5f);
+                for (int i = 0; i < Wall4_States.Length; i++)
+                    Wall4_States[i].SetActive(false);
+                    
+                Wall4_States[3].SetActive(true);
+                Wall4_States[4].SetActive(false);
+                ResetValues();
+                break;
+        }
     }
     
     public void ResetValues()
@@ -285,8 +514,8 @@ public class GameManager : MonoBehaviour
             .Join(SliderComponents[1].GetComponent<Image>().DOFade(0,1f))
             .AppendInterval(5f)
             .OnComplete(() => DOTween.Clear());
-        Time_Slider.value = 15;
-        for (int i = 0; i < 8; i++)
+        Time_Slider.value = Set_Time_Value;
+        for (int i = 0; i < MG_Buttons_InGame.Length; i++)
         {
             Destroy(MG_Buttons_InGame[i]);
             MG_Buttons_InGame[i] = null;
@@ -316,4 +545,5 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         CanPlay = true;
     }
+    
 }
