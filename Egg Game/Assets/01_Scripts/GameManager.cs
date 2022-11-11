@@ -284,14 +284,14 @@ public class GameManager : MonoBehaviour
                         Wall1_States[i].SetActive(false);
                     
                     Wall1_States[3].SetActive(true);
+                    Wall1_States[0].GetComponentInParent<BoxCollider>().enabled = false;
+                    Wall_Number++;
                 break;
         }
         yield return new WaitForSeconds(1f);
         Difficulty = DifficultyGame.none;
-        MG_Cam.SetActive(false);
         CanPlay = true;
-        Wall1_States[0].GetComponentInParent<BoxCollider>().enabled = false;
-        Wall_Number++;
+        MG_Cam.SetActive(false);
         ResetValues();
     }
 
