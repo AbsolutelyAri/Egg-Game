@@ -2,8 +2,10 @@
  * Created by: Krieger
  * Created on: 11/8/2022
  * 
- * Last Modified: n/a
+ * Last Modified: 11/10/2022
  * 
+ * Description: 
+ *  Singleton that handles transitions between scenes in the game. 
  */
 
 using System.Collections;
@@ -16,6 +18,7 @@ public class SceneTransitionManager : MonoBehaviour
     public string startScene; //Start menu scene
     public string[] gameScenes; //cutscenes and levels
     private string currentSceneName;
+    [SerializeField]
     private int currentLevelIndex = 0; //current index in the gameScenes array
 
 
@@ -67,8 +70,21 @@ public class SceneTransitionManager : MonoBehaviour
 
     public void NextScene()
     {
-        SceneManager.LoadScene(gameScenes[currentLevelIndex]);
         currentLevelIndex++;
-        Debug.Log(currentLevelIndex + " is the current level number\nLoading " + gameScenes[currentLevelIndex-1]);
+        Debug.Log(currentLevelIndex + " is the current level number\nLoading " + gameScenes[currentLevelIndex]);
+        SceneManager.LoadScene(gameScenes[currentLevelIndex]);
+        
+    }
+
+    public void StartFromLevelOne()
+    {
+        currentLevelIndex = 0;
+        NextScene();
+    }
+
+    public void ReturnToStartScene()
+    {
+        currentLevelIndex = -1;
+        NextScene();
     }
 }
