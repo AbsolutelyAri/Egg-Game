@@ -1405,11 +1405,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 237993345}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -509.34366, y: -213.2825, z: -126.19508}
+  m_LocalPosition: {x: -10.141235, y: -7.0363007, z: 29.582916}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1620493845}
+  m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &246697934 stripped
@@ -1429,7 +1429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41d0ac74a4dbb44a9e0c6a15b0ae421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemcollected: {fileID: 8300000, guid: 3fa86c7bd9cbe6141bde58a12a2d1d50, type: 3}
+  itemcollected: {fileID: 8300000, guid: f7a12ffce45366047a083e3659516943, type: 3}
 --- !u!82 &246697940
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1440,7 +1440,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 3fa86c7bd9cbe6141bde58a12a2d1d50, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 6ff74729096b2a7469ecb79f02a5655d, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
@@ -1836,7 +1836,7 @@ Transform:
   - {fileID: 537447695}
   - {fileID: 1988554460}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &382862333
 PrefabInstance:
@@ -2071,7 +2071,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2560,7 +2560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41d0ac74a4dbb44a9e0c6a15b0ae421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemcollected: {fileID: 8300000, guid: 286d0a67c8bb1f84bbd2da94c965a14f, type: 3}
+  itemcollected: {fileID: 8300000, guid: f7a12ffce45366047a083e3659516943, type: 3}
 --- !u!65 &661576423
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2584,7 +2584,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 286d0a67c8bb1f84bbd2da94c965a14f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 6ff74729096b2a7469ecb79f02a5655d, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
@@ -2772,7 +2772,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &707642358 stripped
 GameObject:
@@ -3512,7 +3512,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 6f3d3607ca4a8d24a81410683e4f9b9d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f7a12ffce45366047a083e3659516943, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
@@ -3610,7 +3610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41d0ac74a4dbb44a9e0c6a15b0ae421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemcollected: {fileID: 8300000, guid: 6f3d3607ca4a8d24a81410683e4f9b9d, type: 3}
+  itemcollected: {fileID: 8300000, guid: 80be3b32832ffb5479fbcccef5129c98, type: 3}
 --- !u!1 &895890604
 GameObject:
   m_ObjectHideFlags: 0
@@ -3737,7 +3737,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &952097503 stripped
 Transform:
@@ -3818,7 +3818,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!81 &963194229
 AudioListener:
@@ -3991,7 +3991,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41d0ac74a4dbb44a9e0c6a15b0ae421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemcollected: {fileID: 8300000, guid: 801ca64e7c1ebe84295ba4192156767f, type: 3}
+  itemcollected: {fileID: 8300000, guid: 80be3b32832ffb5479fbcccef5129c98, type: 3}
 --- !u!65 &1052172655
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4015,7 +4015,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 801ca64e7c1ebe84295ba4192156767f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f7a12ffce45366047a083e3659516943, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
@@ -4130,7 +4130,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1076453330
 PrefabInstance:
@@ -4240,7 +4240,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4600,7 +4600,7 @@ RectTransform:
   m_Children:
   - {fileID: 1517767416}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5186,7 +5186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41d0ac74a4dbb44a9e0c6a15b0ae421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemcollected: {fileID: 8300000, guid: fdb4aa8360237d3419567ed9d7316c16, type: 3}
+  itemcollected: {fileID: 8300000, guid: 6ff74729096b2a7469ecb79f02a5655d, type: 3}
 --- !u!82 &1354009923
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5197,7 +5197,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: fdb4aa8360237d3419567ed9d7316c16, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 80be3b32832ffb5479fbcccef5129c98, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
@@ -5645,7 +5645,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1439246223
 PrefabInstance:
@@ -6008,7 +6008,7 @@ Transform:
   - {fileID: 770478514}
   - {fileID: 331205635}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 1.1800001, y: 0, z: 90}
 --- !u!114 &1495222126
 MonoBehaviour:
@@ -6598,39 +6598,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3356751432537613521, guid: ffbddc4ef9676cc419e81e06aaa836d8, type: 3}
   m_PrefabInstance: {fileID: 773435337}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1620493844
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1620493845}
-  m_Layer: 0
-  m_Name: Managers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1620493845
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1620493844}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 499.20242, y: 206.2462, z: 155.778}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 237993347}
-  - {fileID: 2066292094}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1627112369 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3356751432537613521, guid: ffbddc4ef9676cc419e81e06aaa836d8, type: 3}
@@ -7376,7 +7343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41d0ac74a4dbb44a9e0c6a15b0ae421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemcollected: {fileID: 8300000, guid: eb7a6d26e2909ee4286c9eb8d0121486, type: 3}
+  itemcollected: {fileID: 8300000, guid: 6ff74729096b2a7469ecb79f02a5655d, type: 3}
 --- !u!65 &1800287900
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7400,7 +7367,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: eb7a6d26e2909ee4286c9eb8d0121486, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 80be3b32832ffb5479fbcccef5129c98, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
@@ -7737,7 +7704,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41d0ac74a4dbb44a9e0c6a15b0ae421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemcollected: {fileID: 8300000, guid: e5ddb708115667a4b8078ed3bad7cbf9, type: 3}
+  itemcollected: {fileID: 8300000, guid: f7a12ffce45366047a083e3659516943, type: 3}
 --- !u!65 &1839386438
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7880,7 +7847,7 @@ RectTransform:
   m_Children:
   - {fileID: 1502356446}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -8442,11 +8409,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2066292092}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 499.20242, y: 206.2462, z: 155.778}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1620493845}
+  m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2079678909
@@ -8539,7 +8506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41d0ac74a4dbb44a9e0c6a15b0ae421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemcollected: {fileID: 8300000, guid: 13789a57ac4504b4b9aa5aaa4a36631c, type: 3}
+  itemcollected: {fileID: 8300000, guid: 80be3b32832ffb5479fbcccef5129c98, type: 3}
 --- !u!65 &2134924781
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8563,7 +8530,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 13789a57ac4504b4b9aa5aaa4a36631c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f7a12ffce45366047a083e3659516943, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
