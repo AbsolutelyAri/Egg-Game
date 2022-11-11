@@ -1394,6 +1394,7 @@ MonoBehaviour:
   startScene: MainMenu
   gameScenes:
   - MainMenu
+  - Tutorial 1
   - Level 1
   - PlayerWinScene
   currentLevelIndex: 0
